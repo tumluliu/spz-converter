@@ -9,6 +9,39 @@ with minimal visual differences between the two.
 ### Discord
 Join the [Scaniverse Discord](https://discord.gg/xKtCxvEmxa) to discuss SPZ-related topics with Niantic developers and community contributors. 
 
+## Command-Line Tool
+
+This repository includes `spz-convert`, a handy command-line tool for converting .ply or .splat files to the compressed .spz format.
+
+### Quick Start
+
+```bash
+# Build the project
+mkdir build && cd build
+cmake ..
+make
+
+# Convert a PLY file to SPZ
+./spz-convert input.ply output.spz
+
+# Convert a .splat file to SPZ  
+./spz-convert input.splat output.spz
+
+# Show help
+./spz-convert --help
+```
+
+### Features
+
+- **PLY Support**: Convert standard PLY files containing Gaussian splat data
+- **SPLAT Support**: Convert binary .splat files (32-byte records)
+- **Coordinate System Conversion**: Automatic conversion between different coordinate systems
+- **Compression**: Achieve ~10x compression ratio compared to PLY files
+- **Spherical Harmonics**: Preserve spherical harmonics data up to degree 3
+- **Antialiasing**: Support for mip-splatting antialiasing flag
+
+See [tools/README.md](tools/README.md) for detailed usage instructions.
+
 ## Internals
 
 ### Coordinate System

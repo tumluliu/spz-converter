@@ -38,6 +38,33 @@ set_target_properties(spz PROPERTIES
   CXX_STANDARD_REQUIRED ON
 )
 
+# Command-line tool
+option(BUILD_TOOLS "Build command-line tools" ON)
+
+if(BUILD_TOOLS)
+  add_executable(spz-convert tools/spz-convert.cc)
+  target_link_libraries(spz-convert PRIVATE spz)
+  target_include_directories(spz-convert PRIVATE src/cc)
+  set_target_properties(spz-convert PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+  )
+  
+  # Test utility for converting SPZ to PLY
+  add_executable(spz-to-ply tools/spz-to-ply.cc)
+  target_link_libraries(spz-to-ply PRIVATE spz)
+  target_include_directories(spz-to-ply PRIVATE src/cc)
+  set_target_properties(spz-to-ply PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+  )
+  
+  # Install the tool
+  install(TARGETS spz-convert
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  )
+endif()
+
 # Installation
 
 ## Install spzConfig.cmake spz::spz target can be found when calling find_package(spz)
